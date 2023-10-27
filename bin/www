@@ -4,14 +4,13 @@
  * Module dependencies.
  */
 
-require('dotenv').config({path:__dirname+'/.env'});
+require('dotenv').config({path:__dirname+'../.env'});
 
 const app = require('../server/app');
 const http = require('http');
 const mongoose = require('mongoose')
 
-
-const MONGO = process.env.MONGO_URI
+const MONGO = 'mongodb+srv://web420_user:s3cret@web340db.93lxfky.mongodb.net/web450DB'
 
 /**
  * Get port from environment and store in Express.
@@ -30,7 +29,8 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(MONGO)
+  .then(() => { console.log('MongoDB Connected')})
   .then(() => {
     server.listen(port);
     server.on('error', onError);
