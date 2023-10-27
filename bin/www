@@ -10,7 +10,7 @@ const app = require('../server/app');
 const http = require('http');
 const mongoose = require('mongoose')
 
-const MONGO = 'mongodb+srv://web420_user:s3cret@web340db.93lxfky.mongodb.net/web450DB'
+const MONGO = 'mongodb+srv://web450_admin:rAGW1990@web340db.93lxfky.mongodb.net/web450DB'
 
 /**
  * Get port from environment and store in Express.
