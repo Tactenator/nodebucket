@@ -1,6 +1,6 @@
 /*
     ==================
-    Title: mclaurine-composer.js, 
+    Title: mclaurine-employee.js, 
     Author: Trevor McLaurine
     Date: 6/17/2023
     Description: Initializes the composer schema
@@ -21,7 +21,7 @@ const tasksSchema = new mongoose.Schema({
 })
 
 //initializes the composer Schema
-const composerSchema = new mongoose.Schema({
+const employeeSchema = new mongoose.Schema({
     "name":
     { 
         type: String, 

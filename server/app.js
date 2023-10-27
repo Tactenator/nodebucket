@@ -13,11 +13,15 @@ const path = require('path')
 // Create the Express app
 const app = express()
 
+const employeeRoutes = require('./routes/mclaurine-employees-routes')
+
 // Configure the app
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '../dist/nodebucket')))
 app.use('/', express.static(path.join(__dirname, '../dist/nodebucket')))
+
+app.use('/api', employeeRoutes)
 
 // error handler for 404 errors
 app.use(function(req, res, next) {
