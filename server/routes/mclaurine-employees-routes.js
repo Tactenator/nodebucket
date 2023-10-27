@@ -124,3 +124,5 @@ router.get('/employees/:id', async (req, res) => {
     //if successful, returns employee object 
     res.status(200).json(employee);
 })
+
+module.exports = router; 

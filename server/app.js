@@ -9,9 +9,12 @@
 const express = require('express')
 const createServer = require('http-errors')
 const path = require('path')
+const morgan = require('morgan');
 
 // Create the Express app
 const app = express()
+
+app.use(morgan('dev'));
 
 const employeeRoutes = require('./routes/mclaurine-employees-routes')
 
