@@ -17,7 +17,7 @@ export class EmployeeServiceService {
     return employee
   }
 
-  validate(employeeId: number) {
+  validateEmployee(employeeId: number) {
     return this.employeeIds.some(id => id ===employeeId);
   }
 
