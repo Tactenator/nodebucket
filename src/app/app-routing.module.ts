@@ -9,6 +9,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -25,6 +28,21 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         title: 'Nodebucket: Home'
+      }, 
+      {
+        path: 'about', 
+        component: AboutComponent, 
+        title: 'Nodebucket - About'
+      }, 
+      {
+        path: 'contact', 
+        component: ContactComponent, 
+        title: 'Nodebucket - Contact'
+      }, 
+      {
+        path: 'login', 
+        component: LoginComponent, 
+        title: 'Nodebucket - Login'
       }
     ]
   },
