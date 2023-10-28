@@ -14,9 +14,28 @@ export class LoginComponent implements OnInit {
   loginInForm: FormGroup; 
   error: String; 
   
-  constructor(private router: Router, private fb: FormBuilder, private employeesService: EmployeesService, private cookieService: CookieService) {}
+  constructor(private router: Router, private fb: FormBuilder, private employeesService: EmployeeServiceService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
     this.loginInForm = this.fb.group({employeeId: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])]});
+  }
+
+  onSubmit() {
+    const formValues = this.loginInForm.value;
+    const employeeId = formValues.employeeId;
+    this.employeesService.findEmployeeById(employeeId)
+        .then((res) => {
+          this.cookieService.set('empId', employeeId, 1); 
+          this.cookieService.set('name', `$res.name`, 1); 
+          this.router.navigate(['/tasks'])
+        })
+        .catch((error) => {
+          console.log(error)
+          this.error = 'Employee ID Not Found. Please try again. '
+        })
+  }
+
+  get form() {
+    return this.loginInForm.controls;
   }
 }
