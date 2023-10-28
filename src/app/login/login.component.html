@@ -1,7 +1,17 @@
 <div class="login-container">
-    <h1 class="login-title">Account Log-In</h1>
-    <h2 class="login-subtitle">Please type your employee ID to login</h2>
-    <input placeholder="Ex: 1007">
-    <button class="login-login">Log-In</button>
+    <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
+        <h1 class="login-title">Account Log-In</h1>
+        <h2 class="login-subtitle">Please type your employee ID to login</h2>
+        <input required formControlName="employeeId" placeholder="Ex: 1007">
+        <button [disabled]="! logInForm.valid" class="login-login">Log-In</button>
+    </form>
+    <div class="msg-error" *ngIf="error">
+        {{ error }}
+      </div>
+      <div *ngIf="form['employeeId'].errors && form['employeeId'].dirty">
+        <div class="msg-error">
+          Employee ID must be a numeric value.
+        </div>
+      </div>
   </div>
   

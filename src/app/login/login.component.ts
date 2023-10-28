@@ -11,17 +11,17 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
 
-  loginInForm: FormGroup; 
+  logInForm: FormGroup; 
   error: String; 
   
   constructor(private router: Router, private fb: FormBuilder, private employeesService: EmployeeServiceService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
-    this.loginInForm = this.fb.group({employeeId: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])]});
+    this.logInForm = this.fb.group({employeeId: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])]});
   }
 
   onSubmit() {
-    const formValues = this.loginInForm.value;
+    const formValues = this.logInForm.value;
     const employeeId = formValues.employeeId;
     this.employeesService.findEmployeeById(employeeId)
         .then((res) => {
@@ -36,6 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   get form() {
-    return this.loginInForm.controls;
+    return this.logInForm.controls;
   }
 }
