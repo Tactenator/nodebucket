@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +8,7 @@ export class EmployeeServiceService {
 
   employeeIds: Array<number> = [1007, 1008, 1009, 1010, 1011, 1012];
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   async findEmployeeById(id: string): Promise<Observable<any>> {
     const response = await fetch(`http://localhost:3000/api/employees/${id}`)
