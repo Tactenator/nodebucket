@@ -12,6 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { signInGuard } from './sign-in-guard.guard';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -43,6 +46,20 @@ const routes: Routes = [
         path: 'login', 
         component: LoginComponent, 
         title: 'Nodebucket - Login'
+      }, 
+      {
+        path: '**', 
+        component: NotfoundComponent, 
+        title: 'Nodebucket - 404'
+      }, 
+      {
+        path: "", 
+        component: BaseLayoutComponent, 
+        children: [{
+          path: "task-dashboard", 
+          component: TasksComponent, 
+          canActivate: [signInGuard]
+        }]
       }
     ]
   },
