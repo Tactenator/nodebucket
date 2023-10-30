@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         .then((res) => {
           this.cookieService.set('empId', employeeId, 1); 
           this.cookieService.set('name', `$res.name`, 1); 
-          this.router.navigate(['/tasks'])
+          this.router.navigate(['/task-dashboard'])
         })
         .catch((error) => {
           console.log(error)

@@ -4,19 +4,30 @@
     align-items: center;
     gap: 2rem; 
     padding-top: 10rem; 
+    height: 90vh; 
+    background: #223164;
 }
 
 .home-title {
     font-weight: bold; 
     font-size: 2rem; 
+    color: #fff; 
 }
 
 .home-subtitle {
     font-size: 1.2rem;
+    color: #fff; 
 }
 
 button {
     padding: 1rem 4rem;
     border: none; 
     border-radius: 15px; 
+    background: #5d5d5d; 
+    color: #fff; 
+    transition: 0.2s; 
+}
+
+button:hover {
+    background: #946b2d;
 }

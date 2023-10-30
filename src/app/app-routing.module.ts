@@ -53,13 +53,9 @@ const routes: Routes = [
         title: 'Nodebucket - 404'
       }, 
       {
-        path: "", 
-        component: BaseLayoutComponent, 
-        children: [{
-          path: "task-dashboard", 
-          component: TasksComponent, 
-          canActivate: [signInGuard]
-        }]
+        path: "task-dashboard", 
+        component: TasksComponent, 
+        canActivate: [signInGuard]
       }
     ]
   },

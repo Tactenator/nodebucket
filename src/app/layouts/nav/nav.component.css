@@ -2,6 +2,8 @@ nav {
     display: flex; 
     justify-content: space-between;
     padding: 2rem 5rem; 
+    background: #0f1d4a; 
+    color: #fff; 
 }
 
 .nav-title {
@@ -17,4 +19,12 @@ nav ul {
 
 nav ul li {
     font-size: 1.3rem; 
+    font-weight: bold;
+    transition: 0.2s; 
+}
+
+
+nav ul li:hover {
+    cursor: pointer; 
+    color: #946b2d;
 }
