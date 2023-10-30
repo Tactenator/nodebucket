@@ -200,22 +200,22 @@ router.post('/employees/:empId/tasks', async (req, res) => {
 })
 
 /**
- * findAllInvoicesByUserName
+ * findAllTasks
  * @openapi
- * /api/customers/{userName}/invoices:
+ * /api/employees/{empId}/tasks:
  *   get:
  *     tags:
- *       - Customers
- *     description: Returns a list of all customers from the NodeShoppers API database
- *     summary: Returns the invoices for the userName specified
+ *       - Employees
+ *     description: Returns a list of tasks that the employee has
+ *     summary: Returns a list of tasks
  *     parameters:
- *       - name: userName
+ *       - name: EmployeeID
  *         in: path
  *         required: true
- *         description: Username that belongs to the invoice 
+ *         description: Employee ID that the employee has. 
  *         schema: 
  *           type: string
- *     operationid: findAllInvoicesByUserName
+ *     operationid: findAllTasks
  *     responses:
  *       '200':
  *         description: "Successful retrieval of documents from the NodeShoppers API"
@@ -224,19 +224,19 @@ router.post('/employees/:empId/tasks', async (req, res) => {
  *       '501':
  *         description: "MongoDB exceptions"
  */
-router.get('/customers/:userName/invoices', async (req,res) => {
+router.get('/employees/{empId}/tasks:', async (req,res) => {
 
     try {
         //searches for a user in the database
-        const customers = await Customers.findOne({ 'userName': req.params.userName })
-        if(!customers){
+        const employee = await Employee.findOne({ 'empId': req.params.empId })
+        if(!employee){
             //if no user is found, throws an error
             res.status(501).send({ 'message': 'Mongo Exception Error'})
         }
         else
         {
             //if successful, sets status to 200 and returns the customer.
-            res.status(200).json(customers); 
+            res.status(200).json(employee); 
         }
     }
     catch(e) {
