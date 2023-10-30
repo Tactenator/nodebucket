@@ -10,8 +10,8 @@ export class EmployeeServiceService {
 
   constructor() { }
 
-  async findEmployeeById(id: string): Promise<Observable<any>> {
-    const response = await fetch(`http://localhost:3000/api/employees/${id}`)
+  async findEmployeeById(empId: string): Promise<Observable<any>> {
+    const response = await fetch(`http://localhost:3000/api/employees/${empId}`)
     const employee = await response.json()
     console.log(employee)
     return employee
