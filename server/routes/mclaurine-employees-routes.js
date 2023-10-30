@@ -171,7 +171,7 @@ router.post('/employees/:empId/tasks', async (req, res) => {
     try{
         // searches for a user based on the parameters written by the user
         const employee = await Employee.findOne({ position: req.params.position })
-        console.log(req.params)
+        console.log(req.body)
         if(!employee){
             // if no user is found, throws an error
             res.status(501).send({ 'message': 'MongoDB Exception'})
@@ -220,14 +220,13 @@ router.post('/employees/:empId/tasks', async (req, res) => {
  *     operationid: findAllTasks
  *     responses:
  *       '200':
- *         description: "Successful retrieval of documents from the NodeShoppers API"
+ *         description: "Successful retrieval of documents from the Employee API"
  *       '500':
  *         description: "Server exceptions"
  *       '501':
  *         description: "MongoDB exceptions"
  */
 router.get('/employees/:empId/tasks:', async (req,res) => {
-
     try {
         //searches for a user in the database
         const employee = await Employee.findOne({ 'empId': req.params.empId })
