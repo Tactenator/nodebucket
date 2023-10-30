@@ -119,4 +119,130 @@ router.get('/employees/:empId', async (req, res) => {
     res.status(200).json(employee);
 })
 
+/**
+ * createTask
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *   post:
+ *     tags:
+ *       - Employees
+ *     name: createTask
+ *     summary: Creates a new task and apply it to the appropriate employee
+ *     parameters:
+ *      - name: empId
+ *        in: path
+ *        required: true
+ *        description: Id for employee
+ *        schema: 
+ *          type: string
+ *     requestBody:
+ *       description: Information about the task
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - name
+ *               - date
+ *               - description
+ *               - importance
+ *               - status
+ *             properties:
+ *               name:
+ *                 type: string
+ *               date:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               importance: 
+ *                 type: string
+ *               status:
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description:  New invoice created
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+
+router.post('/employees/:empId/tasks', async (req, res) => {
+
+    try{
+        // searches for a user based on the parameters written by the user
+        const employee = await Employee.findOne({ 'empId': req.params.empId })
+        if(!user){
+            // if no user is found, throws an error
+            res.status(501).send({ 'message': 'MongoDB Exception'})
+        }
+        else
+        {
+            //if a user is found, a new invoice object is created and initialized with the req.body values
+            const newTask = {
+                name: req.body.name,
+                date: req.body.date,
+                description: req.body.description,
+                importance: req.body.importance, 
+                status: req.body.status
+            }   
+            // pushes the new object into an array already placed in the user's data
+            user.tasks.push(newTask)
+            
+            //saves the new data to the database
+            employee.save()
+            res.status(200).json(employee)
+        }
+    }
+    catch (error) {
+        //if unsuccessful, throws an error
+        res.status(500).send({ 'message': `Server Exception: ${error.message} `})
+    }
+})
+
+/**
+ * findAllInvoicesByUserName
+ * @openapi
+ * /api/customers/{userName}/invoices:
+ *   get:
+ *     tags:
+ *       - Customers
+ *     description: Returns a list of all customers from the NodeShoppers API database
+ *     summary: Returns the invoices for the userName specified
+ *     parameters:
+ *       - name: userName
+ *         in: path
+ *         required: true
+ *         description: Username that belongs to the invoice 
+ *         schema: 
+ *           type: string
+ *     operationid: findAllInvoicesByUserName
+ *     responses:
+ *       '200':
+ *         description: "Successful retrieval of documents from the NodeShoppers API"
+ *       '500':
+ *         description: "Server exceptions"
+ *       '501':
+ *         description: "MongoDB exceptions"
+ */
+router.get('/customers/:userName/invoices', async (req,res) => {
+
+    try {
+        //searches for a user in the database
+        const customers = await Customers.findOne({ 'userName': req.params.userName })
+        if(!customers){
+            //if no user is found, throws an error
+            res.status(501).send({ 'message': 'Mongo Exception Error'})
+        }
+        else
+        {
+            //if successful, sets status to 200 and returns the customer.
+            res.status(200).json(customers); 
+        }
+    }
+    catch(e) {
+        //if unsuccessful, throws an error
+        res.status(500).send({ 'message': `Server Exception: ${e.message}`})
+    }
+})
+
 module.exports = router;

@@ -15,7 +15,13 @@ const tasksSchema = new mongoose.Schema({
     "date": {
         type: String
     },
+    "description": {
+        type: String
+    },
     "importance": {
+        type: String
+    }, 
+    "status": {
         type: String
     }
 })
