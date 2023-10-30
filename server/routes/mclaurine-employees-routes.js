@@ -1,6 +1,6 @@
 /*
     ==================
-    Title: mclaurine-employee-routes.js, 
+    Title: mclaurine-employee-routes.js,
     Author: Trevor McLaurine
     Date: 10/25/2023
     Description: Initializes the routes used for the Employee API
@@ -33,7 +33,7 @@ const router = express.Router();
 router.get('/employees', async (req,res) => {
 
     //Currently, model.find does not accept callback. I've placed the original code in comments to show that I understand the assignment
-    //But placed code that does work for the time being. 
+    //But placed code that does work for the time being.
 
     // try {
     //     await People.find({}, function(err, people) {
@@ -58,7 +58,7 @@ router.get('/employees', async (req,res) => {
     const employees = await Employee.find({ })
 
     //returns the teams that are found
-    res.status(200).json(employees); 
+    res.status(200).json(employees);
 })
 
 /**
@@ -82,10 +82,10 @@ router.get('/employees', async (req,res) => {
  *         description: "Server exceptions"
  */
 
-router.get('/employees/:id', async (req, res) => {
+router.get('/employees/:empId', async (req, res) => {
 
     //Currently, model.find does not accept callback. I've placed the original code in comments to show that I understand the assignment
-    //But placed code that does work for the time being. 
+    //But placed code that does work for the time being.
 
     // try {
     //     employee.findOne({'_id':req.params.id}, function(err, employees) {
@@ -105,24 +105,18 @@ router.get('/employees/:id', async (req, res) => {
     // }
 
     //grabs the id from the URL parameters
-    const { id } = req.params; 
-
-    //Checks to see if the ID from the parameters is valid
-    if(!mongoose.Types.ObjectId.isValid(id))
-    {
-        //returns an error message stating that no employee could be found.
-        return res.status(404).json({error: "No employee can be found"});
-    }
+    // const { employeeID } = req.params;
 
     //searches for employee based on the id variable.
-    const employee = await Employee.findById(id);
+    const employee = await Employee.findOne({ position: req.params.position})
+
     if(!employee)
     {
         //if there is no employee with that id, returns status 404 and a message that employee can't be found
         return res.status(404).json({error: "No employee can be found"});
     }
-    //if successful, returns employee object 
+    //if successful, returns employee object
     res.status(200).json(employee);
 })
 
-module.exports = router; 
+module.exports = router;
