@@ -170,8 +170,9 @@ router.post('/employees/:empId/tasks', async (req, res) => {
 
     try{
         // searches for a user based on the parameters written by the user
-        const employee = await Employee.findOne({ 'empId': req.params.empId })
-        if(!user){
+        const employee = await Employee.findOne({ position: req.params.position })
+        console.log(req.params)
+        if(!employee){
             // if no user is found, throws an error
             res.status(501).send({ 'message': 'MongoDB Exception'})
         }
@@ -185,8 +186,9 @@ router.post('/employees/:empId/tasks', async (req, res) => {
                 importance: req.body.importance, 
                 status: req.body.status
             }   
+            console.log(newTask)
             // pushes the new object into an array already placed in the user's data
-            user.tasks.push(newTask)
+            employee.tasks.push(newTask)
             
             //saves the new data to the database
             employee.save()
@@ -224,7 +226,7 @@ router.post('/employees/:empId/tasks', async (req, res) => {
  *       '501':
  *         description: "MongoDB exceptions"
  */
-router.get('/employees/{empId}/tasks:', async (req,res) => {
+router.get('/employees/:empId/tasks:', async (req,res) => {
 
     try {
         //searches for a user in the database

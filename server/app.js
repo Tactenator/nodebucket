@@ -14,7 +14,6 @@ const cors = require('cors')
 
 // Create the Express app
 const app = express()
-app.use(express.json());
 app.use(cors());
 
 app.use(function (req, res, next) {
