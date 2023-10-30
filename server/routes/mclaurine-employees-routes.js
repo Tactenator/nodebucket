@@ -229,7 +229,7 @@ router.post('/employees/:empId/tasks', async (req, res) => {
 router.get('/employees/:empId/tasks:', async (req,res) => {
     try {
         //searches for a user in the database
-        const employee = await Employee.findOne({ 'empId': req.params.empId })
+        const employee = await Employee.findOne({ 'position': req.params.position })
         if(!employee){
             //if no user is found, throws an error
             res.status(501).send({ 'message': 'Mongo Exception Error'})
