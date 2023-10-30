@@ -48,13 +48,9 @@ const routes: Routes = [
         title: 'Nodebucket - Login'
       },
       {
-        path: "", 
-        component: BaseLayoutComponent, 
-        children: [{
-          path: "tasks", 
+        path: "tasks", 
           component: TasksComponent, 
           canActivate: [signInGuard]
-        }]
       }, 
       {
         path: '**', 
