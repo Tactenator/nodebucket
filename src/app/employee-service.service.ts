@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 export class EmployeeServiceService {
 
   employeeIds: Array<number> = [1007, 1008, 1009, 1010, 1011, 1012];
+  employee: Object; 
 
   constructor() { }
 
