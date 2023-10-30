@@ -46,16 +46,20 @@ const routes: Routes = [
         path: 'login', 
         component: LoginComponent, 
         title: 'Nodebucket - Login'
+      },
+      {
+        path: "", 
+        component: BaseLayoutComponent, 
+        children: [{
+          path: "tasks", 
+          component: TasksComponent, 
+          canActivate: [signInGuard]
+        }]
       }, 
       {
         path: '**', 
         component: NotfoundComponent, 
         title: 'Nodebucket - 404'
-      }, 
-      {
-        path: "task-dashboard", 
-        component: TasksComponent, 
-        canActivate: [signInGuard]
       }
     ]
   },

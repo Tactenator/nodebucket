@@ -7,14 +7,14 @@ import { inject } from '@angular/core';
 export const signInGuard: CanActivateFn = (route, state) => {
   const cookieService = inject(CookieService);
 
-  const user = cookieService.get('employeeID');
+  const user = cookieService.get('empId');
   if (user) {
     return true;
   }
   
   else {
     const router = inject(Router);
-    router.navigate(['/sign-in']);
+    router.navigate(['/login']);
     return false;
   }
 };
