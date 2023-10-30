@@ -13,6 +13,62 @@ const mongoose = require('mongoose')
 const router = express.Router();
 
 /**
+ * createEmployee
+ * @openapi
+ * /api/employees:
+ *   post:
+ *     tags:
+ *       - Employees
+ *     name: createEmployees
+ *     summary: Creates a new customer for the Employees API
+ *     requestBody:
+ *       description: Information about the employee
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - name
+ *               - position
+ *               - empId
+ *             properties:
+ *               firstName:
+ *                 type: string
+ *               lastName:
+ *                 type: string
+ *               empId:
+ *                 type: String
+ *     responses:
+ *       '200':
+ *         description: Customer added to NodeShopper API
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.post('/employees', async (req,res) => {
+    //Grabs information from the req.body function to initialize variables.
+    const { name, position, empId } = req.body; 
+    console.log(req.body)
+
+    try{
+        //creates a new customer. Checks to see if all parameters are met
+        const newEmployee = await Employee.create({ name, position, empId })
+        if(!newEmployee){
+            //if all parameters are not met, throws an error
+            res.status(500).send( { 'message': `MongoDB Exception 501`})
+        }
+        else {
+            //if successful, creates a new customer
+            res.status(200).json(newEmployee);
+        }
+    }
+    catch (error) {
+        //if the request is bad, throws an error
+        res.status(501).json({ 'message': `Server Exception: ${error.message}` })
+    }
+})
+
+/**
  * findAllEmployees
  * @openapi
  * /api/employees:
@@ -108,7 +164,7 @@ router.get('/employees/:empId', async (req, res) => {
     // const { employeeID } = req.params;
 
     //searches for employee based on the id variable.
-    const employee = await Employee.findOne({ position: req.params.position})
+    const employee = await Employee.findOne({ 'empId': req.params.empId })
 
     if(!employee)
     {
@@ -170,8 +226,9 @@ router.post('/employees/:empId/tasks', async (req, res) => {
 
     try{
         // searches for a user based on the parameters written by the user
-        const employee = await Employee.findOne({ position: req.params.position })
-        console.log(req.body)
+        const employee = await Employee.findOne({ 'empId': req.params.empId })
+        console.log(req.params.empId)
+        console.log(employee)
         if(!employee){
             // if no user is found, throws an error
             res.status(501).send({ 'message': 'MongoDB Exception'})
@@ -229,7 +286,7 @@ router.post('/employees/:empId/tasks', async (req, res) => {
 router.get('/employees/:empId/tasks:', async (req,res) => {
     try {
         //searches for a user in the database
-        const employee = await Employee.findOne({ 'position': req.params.position })
+        const employee = await Employee.findOne({ 'empId': req.params.empId })
         if(!employee){
             //if no user is found, throws an error
             res.status(501).send({ 'message': 'Mongo Exception Error'})

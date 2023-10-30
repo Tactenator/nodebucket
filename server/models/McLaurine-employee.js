@@ -34,10 +34,7 @@ const employeeSchema = new mongoose.Schema({
     },
     "empId":
     {
-        type: Number,
-    },
-    "position:": {
-        type: String
+        type: String,
     },
     "tasks": {
         type: [tasksSchema]
