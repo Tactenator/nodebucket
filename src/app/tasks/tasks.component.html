@@ -1,1 +1,25 @@
-<p>tasks works!</p>
+<div class="container">
+    <h1>Welcome {{ name }}</h1>
+    <h2>Your tasks are below</h2>
+    <div class="tasks-container">
+        <div class="tasks-not-started">
+            <h3>Not Started</h3>
+            <div *ngIf="tasks.length > 0">
+                <div *ngFor="let task of tasks">
+                    <div>
+                        <div class="">Name: {{ task.name }}</div>
+                        <div class="">Description: {{ task.description}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tasks-doing">
+            <h3>Tasks in Progress</h3>
+            <div *ngIf="tasks.length > 0"></div>
+        </div>
+        <div class="tasks-done">
+            <h3>Tasks Completed</h3>
+            <div *ngIf="tasks.length > 0"></div>
+        </div>
+    </div>
+</div>

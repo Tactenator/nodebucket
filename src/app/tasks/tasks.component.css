@@ -1,0 +1,13 @@
+.container {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0rem;
+}
+
+.tasks-container {
+    display: flex; 
+    flex-direction: row; 
+    gap: 20rem;  
+    padding-top: 3rem; 
+}
