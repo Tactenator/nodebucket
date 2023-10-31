@@ -26,6 +26,7 @@ export class TasksComponent implements OnInit {
     const data = await res.json()
     this.name = data.name; 
     this.tasks = data.tasks; 
+    console.log(this.tasks)
     return this.name, this.tasks;
   }
 
