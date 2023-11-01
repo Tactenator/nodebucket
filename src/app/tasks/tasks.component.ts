@@ -12,7 +12,7 @@ export class TasksComponent implements OnInit {
 
   empId: string
   name: string
-  tasks: Array<Tasks>
+  tasks: Array<Tasks> = []
 
   constructor(private cookieService: CookieService) {}
 
@@ -24,10 +24,11 @@ export class TasksComponent implements OnInit {
     this.empId = this.cookieService.get('empId')
     const res = await fetch(`http://localhost:3000/api/employees/${this.empId}`)
     const data = await res.json()
-    this.name = data.name; 
-    this.tasks = data.tasks; 
+    const newTasks = data.tasks; 
+    newTasks.forEach((task) => {
+      this.tasks.push(task)
+    })
     console.log(this.tasks)
-    return this.name, this.tasks;
   }
 
 }

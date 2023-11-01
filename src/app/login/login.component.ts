@@ -25,9 +25,6 @@ export class LoginComponent implements OnInit {
     const employeeId = formValues.employeeId;
     this.employeesService.findEmployeeById(employeeId)
         .then((res) => {
-          // this.cookieService.set('empId', employeeId, 1); 
-          // this.cookieService.set('name', `${res.name}`, 1); 
-          // console.log(this.cookieService.get('name'))
           this.router.navigate(['/tasks'])
         })
         .catch((error) => {
