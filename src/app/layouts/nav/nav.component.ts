@@ -6,6 +6,7 @@
 
 // imports statements
 import { Component } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nav',
@@ -14,4 +15,12 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
+  empId: String; 
+
+  constructor(private cookieService: CookieService ) {}
+
+  checkCookie() {
+    this.empId = this.cookieService.get('empId')
+    console.log(this.empId)
+  }
 }

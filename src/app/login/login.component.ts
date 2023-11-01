@@ -13,11 +13,13 @@ export class LoginComponent implements OnInit {
 
   logInForm: FormGroup; 
   error: String; 
+  empId: String; 
   
   constructor(private router: Router, private fb: FormBuilder, private employeesService: EmployeeServiceService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
     this.logInForm = this.fb.group({employeeId: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])]});
+    this.checkCookie()
   }
 
   onSubmit() {
@@ -31,6 +33,10 @@ export class LoginComponent implements OnInit {
           console.log(error)
           this.error = 'Employee ID Not Found. Please try again. '
         })
+  }
+
+  checkCookie() {
+    this.empId = this.cookieService.get('empId')
   }
 
   get form() {
