@@ -4,6 +4,9 @@
     align-items: center;
     gap: 2rem; 
     padding-top: 5rem; 
+    background: #223164;
+    color: #fff; 
+    height: 90vh; 
 }
 
 form {
