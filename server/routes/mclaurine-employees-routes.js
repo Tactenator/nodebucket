@@ -394,15 +394,32 @@ router.delete('/employees/:empId/tasks/:taskId', async (req, res) => {
  *         description: MongoDB Exception
  */
 
-router.put('/employees/:empId/tasks', async (req, res) => {
+router.put('/employees/:empId/tasks/:taskId', async (req, res) => {
+    const tasks = req.body
 
     try{
-        // Employee.update({})       
+        await Employee.updateOne(
+            { empId: req.params.empId, taskId: req.params.taskId }, 
+            { $set: { tasks: { 
+                name: tasks.name,  
+                date: tasks.date, 
+                description: tasks.description, 
+                importance: tasks.importance, 
+                status: tasks.status,
+                taskId: req.params.taskId } }}, 
+        )
+
+        return res.status(200).json({ message: "Task updated"})
         
-        const employee = Employee.findOne({ empId: req.params.empId })
-        if(!employee) {
-            res.status(501).send(response)
-        }
+        
+        
+        // const employee = Employee.findOne({ empId: req.params.empId })
+        // if(!employee) {
+        //     return res.status(501).send(response)
+        // } 
+        // employee.set({ 
+        //     tasks
+        // })
         
     }
     catch (error) {
