@@ -6,7 +6,7 @@
             <h3>Not Started</h3>
             <div *ngIf="tasks.length > 0">
                 <div *ngFor="let task of tasks">
-                    <div *ngIf="task.status === 'Waiting'">
+                    <div *ngIf="task.status === 'ToDo'">
                         <div class="">Name: {{ task.name }}</div>
                         <div class="">Description: {{ task.description}}</div>
                         <div class="">Importance: {{ task.importance}} </div>
@@ -32,7 +32,7 @@
             <h3>Tasks Completed</h3>
             <div *ngIf="tasks.length > 0">
                 <div *ngFor="let task of tasks">
-                    <div *ngIf="task.status === 'finished'">
+                    <div *ngIf="task.status === 'Finished'">
                         <div class="">Name: {{ task.name }}</div>
                         <div class="">Description: {{ task.description}}</div>
                         <div class="">Importance: {{ task.importance}} </div>
