@@ -399,14 +399,15 @@ router.put('/employees/:empId/tasks/:taskId', async (req, res) => {
 
     try{
         await Employee.updateOne(
-            { empId: req.params.empId, taskId: req.params.taskId }, 
-            { $set: { tasks: { 
-                name: tasks.name,  
-                date: tasks.date, 
-                description: tasks.description, 
-                importance: tasks.importance, 
-                status: tasks.status,
-                taskId: req.params.taskId } }}, 
+            { empId: req.params.empId, tasks: {$elemMatch: {taskId: req.params.taskId }} }, 
+            { $set:  { 
+                'tasks.$.name' : tasks.name,  
+                'tasks.$.date': tasks.date, 
+                'tasks.$.description': tasks.description, 
+                'tasks.$.importance': tasks.importance, 
+                'tasks.$.status': tasks.status,
+                'tasks.$.taskId': req.params.taskId 
+            } }
         )
 
         return res.status(200).json({ message: "Task updated"})
