@@ -1,6 +1,15 @@
-.container {
+.about-container {
     display: flex; 
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 2rem 0rem;
+    flex-direction: column;
+    gap: 3rem; 
+    padding: 3rem 3rem; 
+    background: #223164;
+    color: #fff;
+    height: 90vh; 
+}
+
+p {
+    width: 50%; 
 }
