@@ -23,6 +23,9 @@ const tasksSchema = new mongoose.Schema({
     }, 
     "status": {
         type: String
+    }, 
+    "taskId": {
+        type: String
     }
 })
 

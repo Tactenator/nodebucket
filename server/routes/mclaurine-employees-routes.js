@@ -241,7 +241,8 @@ router.post('/employees/:empId/tasks', async (req, res) => {
                 date: req.body.date,
                 description: req.body.description,
                 importance: req.body.importance, 
-                status: req.body.status
+                status: req.body.status, 
+                taskId: req.body.taskId
             }   
             console.log(newTask)
             // pushes the new object into an array already placed in the user's data
@@ -283,7 +284,7 @@ router.post('/employees/:empId/tasks', async (req, res) => {
  *       '501':
  *         description: "MongoDB exceptions"
  */
-router.get('/employees/:empId/tasks:', async (req,res) => {
+router.get('/employees/:empId/tasks', async (req,res) => {
     try {
         //searches for a user in the database
         const employee = await Employee.findOne({ 'empId': req.params.empId })
@@ -300,6 +301,113 @@ router.get('/employees/:empId/tasks:', async (req,res) => {
     catch(e) {
         //if unsuccessful, throws an error
         res.status(500).send({ 'message': `Server Exception: ${e.message}`})
+    }
+})
+
+/**
+ * deleteTask
+ * @openapi
+ * /api/teams/{empId}/tasks/:taskId:
+ *   delete:
+ *     tags:
+ *       - Tasks
+ *     name: deleteTask
+ *     description: Deletes a task by ID
+ *     summary: Removes a task from an employee
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Id of the document to be removed from the API.
+ *         schema: 
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Task deleted
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+
+router.delete('/employees/:empId/tasks/:taskId', async (req, res) => {
+    try {
+
+        await Employee.findOneAndUpdate(
+            { empId: req.params.empId }, 
+            { $pull: { tasks: { taskId: req.params.taskId }}}, 
+            { safe: true, multi: false}
+        )
+        return res.status(200).json({ message: 'Task deleted successfully '})
+    }
+    catch (e) {
+        //if anything goes wrong, throws an error
+        res.status(500).json({ error: `Server Exception ${e.message}` })
+    }
+})
+
+/**
+ * updateTasks
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *   put:
+ *     tags:
+ *       - Employee
+ *     name: updateTasks
+ *     description: Updates an existing employee's tasks document
+ *     summary: Updates the information of tasks of an employee
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Id of the employee to update. 
+ *         schema: 
+ *           type: string
+ *     requestBody:
+ *       description: Employee information
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - name
+ *               - date
+ *               - description
+ *               - importance
+ *               - status
+ *             properties:
+ *               name:
+ *                 type: string
+ *               date:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               importance:
+ *                 type: string
+ *               status: 
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description: Employee updated
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+
+router.put('/employees/:empId/tasks', async (req, res) => {
+
+    try{
+        // Employee.update({})       
+        
+        const employee = Employee.findOne({ empId: req.params.empId })
+        if(!employee) {
+            res.status(501).send(response)
+        }
+        
+    }
+    catch (error) {
+        //throws an error if something goes wrong
+        res.status(500).json({ error: error.message })
     }
 })
 
