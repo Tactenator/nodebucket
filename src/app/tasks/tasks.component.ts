@@ -65,7 +65,7 @@ export class TasksComponent implements OnInit {
       status: status,
       taskId: taskId
     }
-    const res = await fetch(`http://localhost:3000/api/employees/${this.empId}`, {
+    const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks/${taskId}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json'
