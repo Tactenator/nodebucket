@@ -1,14 +1,25 @@
-.main-container {
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 0rem;
-
+.kanban-board {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
 }
 
-.tasks-container {
-    display: flex; 
-    flex-direction: row; 
-    gap: 20rem;  
-    padding-top: 3rem; 
+.column {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 30%;
+}
+
+.column h3 {
+    text-align: center;
+}
+
+.task {
+    background-color: #e1e1e1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
 }

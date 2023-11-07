@@ -1,45 +1,16 @@
-<div class="main-container">
-    <h1>Welcome {{ name }}</h1>
-    <h2>Your tasks are below</h2>
-    <div class="tasks-container">
-        <div class="tasks-not-started">
-            <h3>Not Started</h3>
-            <div *ngIf="tasks.length > 0">
-                <div *ngFor="let task of tasks">
-                    <div *ngIf="task.status === 'ToDo'">
-                        <div class="">Name: {{ task.name }}</div>
-                        <div class="">Description: {{ task.description}}</div>
-                        <div class="">Importance: {{ task.importance}} </div>
-                        <div class="">Status: {{ task.status }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tasks-doing">
-            <h3>Tasks in Progress</h3>
-            <div *ngIf="tasks.length > 0">
-                <div *ngFor="let task of tasks">
-                    <div *ngIf="task.status === 'Doing'">
-                        <div class="">Name: {{ task.name }}</div>
-                        <div class="">Description: {{ task.description}}</div>
-                        <div class="">Importance: {{ task.importance}} </div>
-                        <div class="">Status: {{ task.status }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tasks-done">
-            <h3>Tasks Completed</h3>
-            <div *ngIf="tasks.length > 0">
-                <div *ngFor="let task of tasks">
-                    <div *ngIf="task.status === 'Finished'">
-                        <div class="">Name: {{ task.name }}</div>
-                        <div class="">Description: {{ task.description}}</div>
-                        <div class="">Importance: {{ task.importance}} </div>
-                        <div class="">Status: {{ task.status }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="kanban-board">
+    <div class="column" id="todo">
+        <h3>To-Do</h3>
+        <div class="task">Task 1</div>
+        <div class="task">Task 2</div>
+    </div>
+    <div class="column" id="in-progress">
+        <h3>In Progress</h3>
+        <div class="task">Task 3</div>
+        <div class="task">Task 4</div>
+    </div>
+    <div class="column" id="done">
+        <h3>Done</h3>
+        <div class="task">Task 5</div>
     </div>
 </div>
