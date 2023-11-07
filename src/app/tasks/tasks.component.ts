@@ -79,4 +79,18 @@ export class TasksComponent implements OnInit {
 
   }
 
+  async deleteTask(taskId: String) {
+    const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks/${taskId}`,  {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json'
+      }
+    });
+
+    const resData = 'Task deleted successfully'
+
+    console.log(resData)
+    return resData;
+  }
+
 }
