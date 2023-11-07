@@ -1,23 +1,23 @@
 <div class="kanban-board">
-    <div class="column" id="todo" (dragOver)="onDragOver($event)" (drop)="onDrop($event, 'To Do')">
+    <div class="column" id="todo" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'To Do')">
         <h3>To-Do</h3>
-        <div class="task" draggable="true" *ngFor="let item of filterTasks('To Do')" (onDragStart)="onDragStart(item)">
+        <div class="task" draggable="true" *ngFor="let item of filterTasks('To Do')" (dragstart)="onDragStart(item)">
           <h4>{{ item.name }}</h4>
           <p>{{ item.description }}</p>
           <p>{{ item.importance}}</p>
         </div>
     </div>
-    <div class="column" id="in-progress" (dragOver)="onDragOver($event)" (drop)="onDrop($event, 'To Do')">
+    <div class="column" id="in-progress" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'In Progress')">
         <h3>In Progress</h3>
-        <div class="task" draggable="true" *ngFor="let item of filterTasks('In Progress')" (dragStart)="onDragStart(item)">
+        <div class="task" draggable="true" *ngFor="let item of filterTasks('In Progress')" (dragstart)="onDragStart(item)">
           <h4>{{ item.name }}</h4>
           <p>{{ item.description }}</p>
           <p>{{ item.importance}}</p>
         </div>
     </div>
-    <div class="column" id="done" (dragOver)="onDragOver($event)" (drop)="onDrop($event, 'To Do')">
+    <div class="column" id="done" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'Finished')">
         <h3>Done</h3>
-        <div class="task" draggable="true" *ngFor="let item of filterTasks('Finished')" (dragStart)="onDragStart(item)">
+        <div class="task" draggable="true" *ngFor="let item of filterTasks('Finished')" (dragstart)="onDragStart(item)">
           <h4>{{ item.name }}</h4>
           <p>{{ item.description }}</p>
           <p>{{ item.importance}}</p>
