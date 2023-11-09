@@ -26,4 +26,20 @@
           <button class="task-button" (click)="deleteTask(item.taskId)">Delete</button>
         </div>
     </div>
+
+</div>
+<button class="add-task-button">Add New Task</button>
+<div class="create-task-modal"> 
+  <h2>Add New Task</h2>
+  <label>Name:</label>
+  <input type="text" id="name">
+  <label>Description:</label>
+  <input type="text">
+  <label>Status:</label>
+  <input type="text">
+  <label>Importance:</label>
+  <input type="text">
+  <label>TaskId:</label>
+  <input type="text">
+  <button style="margin-top: 1rem;" class="task-button"(click)="addNewTask()">Create Task</button>
 </div>

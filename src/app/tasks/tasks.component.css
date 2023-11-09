@@ -24,7 +24,7 @@
     margin: 10px 0;
 }
 
-.task-button {
+.task-button, .add-task-button {
   background: #223164;
   color: white;
   border: none;
@@ -33,6 +33,35 @@
   transition: 0.2s background;
 }
 
-.task-button:hover {
+.add-task-button {
+  margin-left: 3rem; 
+}
+
+.task-button:hover, .add-task-button:hover {
   background: red;
+}
+
+.create-task-modal {
+  position: absolute;
+  display: flex; 
+  flex-direction: column; 
+  gap: 0.3rem; 
+  background-color: #fff; 
+  padding: 5rem 5rem; 
+  top: 50%; right: 50%;
+  transform: translate(50%,-50%);
+  border-radius: 15px; 
+  box-shadow: 0 0 0 100vw rgba(0,0,0,.5);
+}
+
+.create-task-modal h2 {
+  text-align: center; 
+}
+
+.create-task-modal input {
+  width: 20rem; 
+}
+
+.hidden {
+  display: none; 
 }

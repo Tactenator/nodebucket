@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { Tasks } from '../tasks';
 
@@ -12,13 +13,22 @@ export class TasksComponent implements OnInit {
 
   empId: string
   name: string
+  newTaskForm: FormGroup;
+
   tasks: Array<Tasks> = []
 
   currentItem: any;
 
-  constructor(private cookieService: CookieService) {}
+  constructor(private cookieService: CookieService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.newTaskForm = this.fb.group({
+      name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*')])],
+      status: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      importance: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      description: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      taskId: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])]
+    });
     this.fetchTasks()
   }
 
@@ -91,6 +101,15 @@ export class TasksComponent implements OnInit {
 
     console.log(resData)
     return resData;
+  }
+
+  showCreateTaskModal() {
+    
+  }
+
+  addNewTask( ) {
+    const name = document.getElementById('name')
+    console.log(name.innerHTML)
   }
 
 }
