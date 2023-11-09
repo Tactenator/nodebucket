@@ -54,6 +54,19 @@
   box-shadow: 0 0 0 100vw rgba(0,0,0,.5);
 }
 
+.close-modal {
+  position: absolute; 
+  top: 3%; 
+  right: 5%; 
+  font-size: 2rem;
+  transition: 0.2s;  
+}
+
+.close-modal:hover {
+  cursor: pointer; 
+  color: red; 
+}
+
 .create-task-modal h2 {
   text-align: center; 
 }

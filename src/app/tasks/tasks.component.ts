@@ -104,12 +104,36 @@ export class TasksComponent implements OnInit {
   }
 
   showCreateTaskModal() {
-    
+    const modal = document.querySelector('.create-task-modal')
+    modal.classList.remove('hidden')
   }
 
-  addNewTask( ) {
-    const name = document.getElementById('name')
-    console.log(name.innerHTML)
+  hideCreateTaskModal() {
+    const modal = document.querySelector('.create-task-modal')
+    modal.classList.add('hidden')
+  }
+
+  async addNewTask( ) {
+    const formValues = this.newTaskForm.value;
+    const newTask = {
+      name: formValues.name, 
+      description: formValues.description, 
+      status: formValues.status, 
+      importance: formValues.importance, 
+      taskId: formValues.taskId
+    }
+
+    const res = await fetch(`https://localhost:3000/${this.empId}/tasks`, {
+      method: 'POST', 
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(newTask)
+    })
+
+    const resData = await res.json();
+
+    return resData;
   }
 
 }
