@@ -99,7 +99,7 @@ export class TasksComponent implements OnInit {
 
     const resData = 'Task deleted successfully'
 
-    console.log(resData)
+    location.reload()
     return resData;
   }
 
@@ -123,7 +123,7 @@ export class TasksComponent implements OnInit {
       taskId: formValues.taskId
     }
 
-    const res = await fetch(`https://localhost:3000/${this.empId}/tasks`, {
+    const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks`, {
       method: 'POST', 
       headers: {
         'Content-type': 'application/json'
@@ -133,7 +133,12 @@ export class TasksComponent implements OnInit {
 
     const resData = await res.json();
 
+    const modal = document.querySelector('.create-task-modal')
+    modal.classList.add('hidden')
+    location.reload()
     return resData;
   }
+
+  
 
 }
