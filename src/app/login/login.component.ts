@@ -11,10 +11,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
 
-  logInForm: FormGroup; 
-  error: String; 
-  empId: String; 
-  
+  logInForm: FormGroup;
+  error: String;
+  empId: String;
+
   constructor(private router: Router, private fb: FormBuilder, private employeesService: EmployeeServiceService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
@@ -25,14 +25,18 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const formValues = this.logInForm.value;
     const employeeId = formValues.employeeId;
-    this.employeesService.findEmployeeById(employeeId)
-        .then((res) => {
-          this.router.navigate(['/tasks'])
-        })
-        .catch((error) => {
-          console.log(error)
-          this.error = 'Employee ID Not Found. Please try again. '
-        })
+    const validUser = this.employeesService.validateEmployee(employeeId)
+    if(validUser) {
+      this.employeesService.findEmployeeById(employeeId)
+      .then(() => {
+        this.router.navigate(['/tasks'])
+      })
+      .catch((error) => {
+        console.log(error)
+        this.error = 'Employee ID Not Found. Please try again. '
+      })
+    }
+    return this.error = 'Employee ID Not Found. Please try again. '
   }
 
   checkCookie() {
