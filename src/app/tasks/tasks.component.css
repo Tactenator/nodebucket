@@ -33,48 +33,74 @@
   transition: 0.2s background;
 }
 
+.modal-text p {
+  font-size: 2rem;
+}
+
+.delete-button-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.delete-task-button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 0.6rem 0.6rem;
+  border-radius: 10px;
+}
+
+.cancel-delete-button {
+  background: #223164;
+  color: white;
+  border: none;
+  padding: 0.6rem 0.6rem;
+  border-radius: 10px;
+
+}
+
 .add-task-button {
-  margin-left: 3rem; 
+  margin-left: 3rem;
 }
 
 .task-button:hover, .add-task-button:hover {
   background: red;
 }
 
-.create-task-modal {
+.create-task-modal, .delete-task-modal {
   position: absolute;
-  display: flex; 
-  flex-direction: column; 
-  gap: 0.3rem; 
-  background-color: #fff; 
-  padding: 5rem 5rem; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background-color: #fff;
+  padding: 5rem 5rem;
   top: 50%; right: 50%;
   transform: translate(50%,-50%);
-  border-radius: 15px; 
+  border-radius: 15px;
   box-shadow: 0 0 0 100vw rgba(0,0,0,.5);
 }
 
 .close-modal {
-  position: absolute; 
-  top: 3%; 
-  right: 5%; 
+  position: absolute;
+  top: 3%;
+  right: 5%;
   font-size: 2rem;
-  transition: 0.2s;  
+  transition: 0.2s;
 }
 
 .close-modal:hover {
-  cursor: pointer; 
-  color: red; 
+  cursor: pointer;
+  color: red;
 }
 
 .create-task-modal h2 {
-  text-align: center; 
+  text-align: center;
 }
 
 .create-task-modal input {
-  width: 20rem; 
+  width: 20rem;
 }
 
 .hidden {
-  display: none; 
+  display: none;
 }

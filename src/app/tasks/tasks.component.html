@@ -2,33 +2,38 @@
     <div class="column" id="todo" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'To Do')">
         <h3>To-Do</h3>
         <div class="task" draggable="true" *ngFor="let item of filterTasks('To Do')" (dragstart)="onDragStart(item)">
-          <h4>{{ item.name }}</h4>
-          <p>{{ item.description }}</p>
-          <p>{{ item.importance}}</p>
-          <button class="task-button" (click)="deleteTask(item.taskId)">Delete</button>
+          <h4>Name: {{ item.name }}</h4>
+          <p>Description: {{ item.description }}</p>
+          <p>Importance: {{ item.importance}}</p>
+          <p>ID: {{item.taskId }}</p>
+          <button class="task-button" (click)="showDeleteTaskModal(item.taskId)">Delete</button>
         </div>
     </div>
     <div class="column" id="in-progress" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'In Progress')">
         <h3>In Progress</h3>
         <div class="task" draggable="true" *ngFor="let item of filterTasks('In Progress')" (dragstart)="onDragStart(item)">
-          <h4>{{ item.name }}</h4>
-          <p>{{ item.description }}</p>
-          <p>{{ item.importance}}</p>
-          <button class="task-button" (click)="deleteTask(item.taskId)">Delete</button>
+          <h4>Name: {{ item.name }}</h4>
+          <p>Description: {{ item.description }}</p>
+          <p>Importance: {{ item.importance}}</p>
+          <p>ID: {{item.taskId }}</p>
+          <button class="task-button" (click)="showDeleteTaskModal(item.taskId)">Delete</button>
         </div>
     </div>
     <div class="column" id="done" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'Finished')">
         <h3>Done</h3>
         <div class="task" draggable="true" *ngFor="let item of filterTasks('Finished')" (dragstart)="onDragStart(item)">
-          <h4>{{ item.name }}</h4>
-          <p>{{ item.description }}</p>
-          <p>{{ item.importance}}</p>
-          <button class="task-button" (click)="deleteTask(item.taskId)">Delete</button>
+          <h4>Name: {{ item.name }}</h4>
+          <p>Description: {{ item.description }}</p>
+          <p>Importance: {{ item.importance}}</p>
+          <p>ID: {{item.taskId }}</p>
+          <button class="task-button" (click)="showDeleteTaskModal(item.taskId)">Delete</button>
         </div>
     </div>
 
 </div>
+
 <button class="add-task-button" (click)="showCreateTaskModal()">Add New Task</button>
+
 <form [formGroup]="newTaskForm" class="create-task-modal hidden">
   <div class="close-modal" (click)="hideCreateTaskModal()">X</div>
   <h2>Add New Task</h2>
@@ -48,3 +53,13 @@
   <input type="text" required formControlName="taskId">
   <button style="margin-top: 1rem;" class="task-button"(click)="addNewTask()">Create Task</button>
 </form>
+
+<div class="delete-task-modal hidden">
+  <div class="modal-text">
+    <p>Are you sure you want to delete this task?</p>
+    <div class="delete-button-container">
+      <button class="delete-task-button" (click)="deleteTask(taskToDelete)">Delete Task</button>
+      <button class="cancel-delete-button" (click)="closeDeleteTaskModal()">Cancel</button>
+    </div>
+  </div>
+</div>

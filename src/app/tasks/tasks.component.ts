@@ -20,6 +20,7 @@ export class TasksComponent implements OnInit {
 
   empId: string
   name: string
+  taskToDelete: String
   newTaskForm: FormGroup;
 
   tasks: Array<Tasks> = []
@@ -105,18 +106,25 @@ export class TasksComponent implements OnInit {
 
   //deletes a task in the database.
   async deleteTask(taskId: String) {
-    const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks/${taskId}`,  {
-      method: 'DELETE',
-      headers: {
-        'Content-type': 'application/json'
-      }
-    });
+    if(this.taskToDelete != ''){
+      const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks/${taskId}`,  {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json'
+        }
+      });
 
-    const resData = 'Task deleted successfully'
+      const resData = 'Task deleted successfully'
 
-    //location.reload is to reload the page and show the new list of tasks.
-    location.reload()
-    return resData;
+      //location.reload is to reload the page and show the new list of tasks.
+      location.reload()
+      this.taskToDelete = ''
+      return resData;
+    }
+    else {
+      return ''
+    }
+
   }
 
   //changes classlist of new task modal and allows it to be seen.
@@ -128,6 +136,18 @@ export class TasksComponent implements OnInit {
   //hides the task modal after user clicks the X in the corner.
   hideCreateTaskModal() {
     const modal = document.querySelector('.create-task-modal')
+    modal.classList.add('hidden')
+  }
+
+  showDeleteTaskModal(taskId: String) {
+    this.taskToDelete = taskId
+    const modal = document.querySelector('.delete-task-modal')
+    modal.classList.remove('hidden')
+  }
+
+  //hides the task modal after user clicks the X in the corner.
+  closeDeleteTaskModal() {
+    const modal = document.querySelector('.delete-task-modal')
     modal.classList.add('hidden')
   }
 
