@@ -29,7 +29,7 @@
 
 </div>
 <button class="add-task-button" (click)="showCreateTaskModal()">Add New Task</button>
-<form [formGroup]="newTaskForm" class="create-task-modal hidden"> 
+<form [formGroup]="newTaskForm" class="create-task-modal hidden">
   <div class="close-modal" (click)="hideCreateTaskModal()">X</div>
   <h2>Add New Task</h2>
   <label>Name:</label>
@@ -37,7 +37,11 @@
   <label>Description:</label>
   <input type="text" required formControlName="description">
   <label>Status:</label>
-  <input type="text" required formControlName="status">
+  <select name="status" required formControlName="status">
+    <option value="To Do">To do</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Finished">Finished</option>
+  </select>
   <label>Importance:</label>
   <input type="text" required formControlName="importance">
   <label>TaskId:</label>
