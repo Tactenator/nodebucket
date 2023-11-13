@@ -1,7 +1,8 @@
 /**
  * Title: app.module.ts
- * Author: Professor Krasso
- * Date: 8/5/23
+ * Author: Trevor McLaurine
+ * Date: 11/13/2023
+ * Description: App Module
  */
 
 // imports statements
@@ -37,8 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, 
-    FormsModule, 
+    AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],

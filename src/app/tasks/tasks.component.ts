@@ -1,3 +1,10 @@
+/**
+ * Title: tasks.component.ts
+ * Author: Trevor McLaurine
+ * Date: 11/13/2023
+ * Description: Task Component
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -22,6 +29,7 @@ export class TasksComponent implements OnInit {
   constructor(private cookieService: CookieService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    //initializes the form group and provides validators
     this.newTaskForm = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*')])],
       status: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
@@ -29,9 +37,11 @@ export class TasksComponent implements OnInit {
       description: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
       taskId: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])]
     });
+    //fetches task of logged in employee
     this.fetchTasks()
   }
 
+  //uses fetch API to fetch tasks and place them in the tasks array
   async fetchTasks() {
     this.empId = this.cookieService.get('empId')
     const res = await fetch(`http://localhost:3000/api/employees/${this.empId}`)
@@ -42,30 +52,34 @@ export class TasksComponent implements OnInit {
     })
   }
 
+  //filters each tasks based on the status of the task. Allows each task to be placed in it's appropriate place
   filterTasks(status: string) {
     return this.tasks.filter(x => x.status == status)
   }
 
+  //ensures that the current item is always registered on drag.
   onDragStart(item: any) {
-
     this.currentItem = item;
   }
 
+  //updates the status of the task based on where it is dropped.
   onDrop(e: any, status: string) {
-
     e.preventDefault()
     const record = this.tasks.find(x => x.taskId == this.currentItem.taskId)
     if(record != undefined){
       record.status = status;
+      //calls to update task in database based on status change
       this.updateTask(record.name, record.date, record.description, record.importance, record.status, record.taskId )
     }
     this.currentItem = null ;
   }
 
+  //essentially stops the page from halting dragging. The default is to reload, which this will prevent.
   onDragOver(e: any) {
     e.preventDefault()
   }
 
+  //updates the task based on the new status where it was dragged to.
   async updateTask(name: String, date: String, description: String, importance: String, status: String, taskId: String) {
     const newTaskData = {
       name: name,
@@ -89,6 +103,7 @@ export class TasksComponent implements OnInit {
 
   }
 
+  //deletes a task in the database.
   async deleteTask(taskId: String) {
     const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks/${taskId}`,  {
       method: 'DELETE',
@@ -99,32 +114,36 @@ export class TasksComponent implements OnInit {
 
     const resData = 'Task deleted successfully'
 
+    //location.reload is to reload the page and show the new list of tasks.
     location.reload()
     return resData;
   }
 
+  //changes classlist of new task modal and allows it to be seen.
   showCreateTaskModal() {
     const modal = document.querySelector('.create-task-modal')
     modal.classList.remove('hidden')
   }
 
+  //hides the task modal after user clicks the X in the corner.
   hideCreateTaskModal() {
     const modal = document.querySelector('.create-task-modal')
     modal.classList.add('hidden')
   }
 
+  //adds a new task to the database.
   async addNewTask( ) {
     const formValues = this.newTaskForm.value;
     const newTask = {
-      name: formValues.name, 
-      description: formValues.description, 
-      status: formValues.status, 
-      importance: formValues.importance, 
+      name: formValues.name,
+      description: formValues.description,
+      status: formValues.status,
+      importance: formValues.importance,
       taskId: formValues.taskId
     }
 
     const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks`, {
-      method: 'POST', 
+      method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
@@ -139,6 +158,6 @@ export class TasksComponent implements OnInit {
     return resData;
   }
 
-  
+
 
 }

@@ -1,7 +1,8 @@
 /**
  * Title: security.component.ts
- * Author: Professor Krasso
- * Date: 8/5/23
+ * Author: Trevor McLaurine
+ * Date: 11/13/2023
+ * Description: Security Component
  */
 
 // imports statements

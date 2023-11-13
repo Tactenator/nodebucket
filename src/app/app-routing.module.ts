@@ -1,7 +1,8 @@
 /**
- * Title: app-routing.module.ts
- * Author: Professor Krasso
- * Date: 8/5/23
+ * Title: app.routing.module.ts
+ * Author: Trevor McLaurine
+ * Date: 11/13/2023
+ * Description: App routing module
  */
 
 // imports statements
@@ -31,30 +32,30 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         title: 'Nodebucket: Home'
-      }, 
+      },
       {
-        path: 'about', 
-        component: AboutComponent, 
+        path: 'about',
+        component: AboutComponent,
         title: 'Nodebucket - About'
-      }, 
+      },
       {
-        path: 'contact', 
-        component: ContactComponent, 
+        path: 'contact',
+        component: ContactComponent,
         title: 'Nodebucket - Contact'
-      }, 
+      },
       {
-        path: 'login', 
-        component: LoginComponent, 
+        path: 'login',
+        component: LoginComponent,
         title: 'Nodebucket - Login'
       },
       {
-        path: "tasks", 
-          component: TasksComponent, 
+        path: "tasks",
+          component: TasksComponent,
           canActivate: [signInGuard]
-      }, 
+      },
       {
-        path: '**', 
-        component: NotfoundComponent, 
+        path: '**',
+        component: NotfoundComponent,
         title: 'Nodebucket - 404'
       }
     ]

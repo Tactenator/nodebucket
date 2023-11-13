@@ -1,7 +1,8 @@
 /**
  * Title: nav.component.ts
- * Author: Professor Krasso
- * Date: 8/5/23
+ * Author: Trevor McLaurine
+ * Date: 11/13/2023
+ * Description: Nav Component
  */
 
 // imports statements
@@ -15,7 +16,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class NavComponent {
 
-  empId: String; 
+  empId: String;
 
   constructor(private cookieService: CookieService ) {}
 
