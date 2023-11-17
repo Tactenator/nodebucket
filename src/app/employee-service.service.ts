@@ -22,7 +22,7 @@ export class EmployeeServiceService {
 
   //sends request via fetch API to search for employee.
   async findEmployeeById(empId: string): Promise<Observable<any>> {
-    const response = await fetch(`http://localhost:3000/api/employees/${empId}`)
+    const response = await fetch(`https://nodebucket-api.onrender.com/api/employees/${empId}`)
     const employee = await response.json()
     this.cookieService.set('empId', employee.empId);
     this.cookieService.set('name', employee.name);

@@ -45,7 +45,7 @@ export class TasksComponent implements OnInit {
   //uses fetch API to fetch tasks and place them in the tasks array
   async fetchTasks() {
     this.empId = this.cookieService.get('empId')
-    const res = await fetch(`http://localhost:3000/api/employees/${this.empId}`)
+    const res = await fetch(`https://nodebucket-api.onrender.com/api/employees/${this.empId}`)
     const data = await res.json()
     const newTasks = data.tasks;
     newTasks.forEach((task) => {
@@ -90,7 +90,7 @@ export class TasksComponent implements OnInit {
       status: status,
       taskId: taskId
     }
-    const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks/${taskId}`, {
+    const res = await fetch(`https://nodebucket-api.onrender.com/api/employees/${this.empId}/tasks/${taskId}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json'
@@ -107,7 +107,7 @@ export class TasksComponent implements OnInit {
   //deletes a task in the database.
   async deleteTask(taskId: String) {
     if(this.taskToDelete != ''){
-      const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks/${taskId}`,  {
+      const res = await fetch(`https://nodebucket-api.onrender.com/api/employees/${this.empId}/tasks/${taskId}`,  {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json'
@@ -162,7 +162,7 @@ export class TasksComponent implements OnInit {
       taskId: formValues.taskId
     }
 
-    const res = await fetch(`http://localhost:3000/api/employees/${this.empId}/tasks`, {
+    const res = await fetch(`https://nodebucket-api.onrender.com/api/employees/${this.empId}/tasks`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
